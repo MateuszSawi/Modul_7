@@ -209,7 +209,6 @@ generateAuthors();
 
 function addClickListenersToAuthors(){
   /* find all links to tags */
-  const href = document.querySelectorAll('.post-author');
   const allTagLinks = document.querySelectorAll('a[href^="#author-"]');
   /* START LOOP: for each link */
   for(let allTagLink of allTagLinks){
