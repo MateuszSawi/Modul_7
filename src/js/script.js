@@ -103,17 +103,18 @@
       //console.log('Accordion thisProduct.element: ' + thisProduct.element);
       /* find the clickable trigger (the element that should react to clicking) */
       //const clickableTrigger = thisProduct.element.querySelectorAll(select.menuProduct.clickable);
-
+      
       /* START: add event listener to clickable trigger on event click */
       thisProduct.accordionTrigger.addEventListener('click', function(event) {
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
-        const activeProduct = document.querySelectorAll('.active');
+        const activeProduct = document.querySelector('.active');
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        if(activeProduct != thisProduct.element){
-          thisProduct.element.classList.toggle('active');
+        if(activeProduct && activeProduct != thisProduct.element){
+          activeProduct.classList.remove('active');
         }      
+        thisProduct.element.classList.toggle('active');
       });
     }
 
@@ -160,12 +161,24 @@
         for(let optionId in param.options) { //===========================
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          // 7.7
-          const optionImage = thisProduct.imageWrapper.querySelector('.ingredients-' + optionId + '');
-          console.log('optionImage: ', optionImage);
+
+          //============================       7.7       ===================================
+          
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId + '');
+          //console.log('optionImage: ', optionImage);
+          //console.log('formData[paramId]: ', formData[paramId]);
+
+          if(optionImage && formData[paramId] && formData[paramId].includes(optionId)){
+            optionImage.classList.add('active');       
+          } else if (optionImage && formData[paramId] && !formData[paramId].includes(optionId)){
+            optionImage.classList.remove('active');  
+          }
 
           //console.log('optionId, option: ', optionId, option);
           //console.log('formData[paramId] ', formData[paramId]);
+
+          //============================     End of 7.7    ================================
+
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId] && formData[paramId].includes(optionId)) {
             // check if the option is not default
