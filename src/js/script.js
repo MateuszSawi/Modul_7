@@ -77,6 +77,11 @@
       defaultDeliveryFee: 20,
     },
     // CODE ADDED END
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
   };
   
   const templates = {
@@ -422,16 +427,14 @@
 
     remove(cartProduct){
       const thisCart = this;
-
       //znajduje produkt ktory usuwam
-      const productWrapper = thisCart.dom.wrapper.querySelector('.cart__order-summary li');
-      
-      productWrapper.remove();
+      cartProduct.dom.wrapper.remove();
       //znajduje index usuwanego elementu w tablicy
       const index = thisCart.products.indexOf(cartProduct);
       //usuwam 1 element poczawszy od elementu o indexie 'index' (usuwam element ktory chce usunac)
       thisCart.products.splice(index, 1);
-
+      //const removedElement = thisCart.products.splice(index, 1);
+      //console.log('removedElement: ', removedElement);
       thisCart.updateCart();
     }
 
@@ -565,14 +568,30 @@
       const thisApp = this;
       //console.log('thisApp.data: ', thisApp.data);
       for(let productData in thisApp.data.products){
-        new Product(productData, thisApp.data.products[productData]);
+        //new Product(productData, thisApp.data.products[productData]);
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
       }
     },
 
     initData: function(){
       const thisApp = this;
 
-      thisApp.data = dataSource;
+      //thisApp.data = dataSource;
+      thisApp.data = {};
+      const url = settings.db.url + '/' + settings.db.products;
+    
+      fetch(url)
+        .then(function(rawResponse){
+          return rawResponse.json();
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse: ', parsedResponse);
+          // save parsedResponse as thisApp.data.products
+          parsedResponse = thisApp.data.products;
+          // execute initMenu method
+          thisApp.initMenu();
+        });
+      console.log('thisApp.data: ', JSON.stringify(thisApp.data));
     },
 
     initCart: function(){
@@ -597,7 +616,7 @@
       // console.log('templates: ', templates);
 
       thisApp.initData();
-      thisApp.initMenu();
+      //thisApp.initMenu();
       thisApp.initCart();
       //thisApp.initCartProduct();
     },
