@@ -5,10 +5,9 @@ import Booking from './components/Booking.js';
 
 const app = {
   initBooking: function(){
-    const thisApp = this;
+    // const thisApp = this;
 
-    thisApp.widgetContainer = document.querySelector(select.containerOf.booking);
-    
+    new Booking();
   },
 
   initPages: function(){

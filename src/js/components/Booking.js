@@ -1,20 +1,35 @@
-import {settings, select} from '../settings.js';
+import {settings, select, templates} from '../settings.js';
 
 class Booking{
-  constructor(element){
+  constructor(){
     const thisBooking = this;
 
-    thisBooking.getElements(element);
+    thisBooking.getElements();
+    thisBooking.render();
+    thisBooking.initWidgets();
   }
 
-  getElements(element){
+  getElements(){
     const thisBooking = this;
   
-    thisBooking.element = element;
     thisBooking.widgetContainer = document.querySelector(select.containerOf.booking);
   }
 
+  render(){
+    const thisBooking = this;
 
+    const generatedHTML = templates.bookingWidget();
+
+    thisBooking.dom = {};
+
+    thisBooking.dom.wrapper = thisBooking.widgetContainer;
+
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
+  }
+
+  initWidgets(){
+
+  }
 }
 
 export default Booking;
