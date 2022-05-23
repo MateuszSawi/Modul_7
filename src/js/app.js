@@ -1,9 +1,15 @@
 import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
-
+import Booking from './components/Booking.js';
 
 const app = {
+  initBooking: function(){
+    // const thisApp = this;
+
+    new Booking();
+  },
+
   initPages: function(){
     const thisApp = this;
 
@@ -48,7 +54,7 @@ const app = {
       // } else {
       //   page.classList.remove(classNames.pages.active); 
       // }
-      page.classList.toggle(classNames.pages.active, pageId == pageId);       
+      page.classList.toggle(classNames.pages.active, pageId == page.id);       
     }
     for(let link of thisApp.navLinks){
       link.classList.toggle(
@@ -116,6 +122,7 @@ const app = {
     thisApp.initData();
     //thisApp.initMenu();
     thisApp.initCart();
+    thisApp.initBooking();
     //thisApp.initCartProduct();
   },
 };
