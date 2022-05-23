@@ -1,4 +1,5 @@
 import {settings, select, templates} from '../settings.js';
+import AmountWidget from './AmountWidget.js';
 
 class Booking{
   constructor(){
@@ -23,12 +24,30 @@ class Booking{
     thisBooking.dom = {};
 
     thisBooking.dom.wrapper = thisBooking.widgetContainer;
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.hoursAmount);
 
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
   }
 
   initWidgets(){
+    const thisBooking = this;
 
+    thisBooking.price = thisBooking.dom.wrapper.querySelector(select.cartProduct.price);
+    console.log('LINIA NIZEJ BLAD !!!!');
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    console.log('CHECK 1');
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    console.log('CHECK 2');
+    thisBooking.dom.peopleAmount.addEventListener('updated', function(event){
+      event.preventDefault();
+      
+    });
+
+    thisBooking.dom.hoursAmount.addEventListener('updated', function(event){
+      event.preventDefault();
+      
+    });
   }
 }
 

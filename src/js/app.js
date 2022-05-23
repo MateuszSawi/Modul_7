@@ -54,7 +54,7 @@ const app = {
       // } else {
       //   page.classList.remove(classNames.pages.active); 
       // }
-      page.classList.toggle(classNames.pages.active, pageId == pageId);       
+      page.classList.toggle(classNames.pages.active, pageId == page.id);       
     }
     for(let link of thisApp.navLinks){
       link.classList.toggle(
