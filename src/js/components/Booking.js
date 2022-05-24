@@ -24,10 +24,11 @@ class Booking{
     thisBooking.dom = {};
 
     thisBooking.dom.wrapper = thisBooking.widgetContainer;
-    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);
-    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.hoursAmount);
 
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
+    
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.hoursAmount);
   }
 
   initWidgets(){
