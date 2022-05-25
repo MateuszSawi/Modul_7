@@ -6,13 +6,12 @@ class AmountWidget extends BaseWidget{
     super(element, settings.amountWidget.defaultValue);
     const thisWidget = this;
 
-    //console.log('AmountWidget: ', thisWidget);
-    //console.log('Element: ', element);
-
     thisWidget.getElements(element);
     thisWidget.initActions();
     thisWidget.setValue(thisWidget.dom.input.value);
 
+    console.log('AmountWidget: ', thisWidget);
+    //console.log('Element: ', element);
   }
 
   getElements(){
@@ -24,27 +23,31 @@ class AmountWidget extends BaseWidget{
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
 
-  setValue(value){
-    const thisWidget = this;
-    //thisWidget.value = thisWidget.dom.wrapper.querySelector(settings.amountWidget.defaultValue);
+  // setValue(value){ //12:29
+  //   const thisWidget = this;
+  //   //thisWidget.value = thisWidget.dom.wrapper.querySelector(settings.amountWidget.defaultValue);
 
-    const newValue = parseInt(value);
+  //   const newValue = thisWidget.parseValue(value);
 
-    // TODO: Add validation
-    if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin-1 && newValue <= settings.amountWidget.defaultMax+1){
-      thisWidget.value = newValue;
-      this.announce();
-    }
-    thisWidget.dom.input.value = thisWidget.value;
-  }
-
-  parseValue(value){
-
-
-  }
+  //   // TODO: Add validation
+  //   if(thisWidget.value !== newValue && thisWidget.isValid(newValue)){
+  //     thisWidget.value = newValue;
+  //     this.announce();
+  //   }
+  //   // thisWidget.dom.input.value = thisWidget.value;
+  //   thisWidget.renderValue();
+  // }
 
   isValid(value){
+    return !isNaN(value) 
+      && value >= settings.amountWidget.defaultMin-1 
+      && value <= settings.amountWidget.defaultMax+1;
+  }
 
+  renderValue(){
+    const thisWidget = this;
+
+    thisWidget.dom.input.value = thisWidget.value;
   }
 
   initActions(){
@@ -66,15 +69,6 @@ class AmountWidget extends BaseWidget{
       event.preventDefault();
       thisWidget.setValue(thisWidget.value+1);
     });
-  }
-
-  announce(){
-    const thisWidget = this;
-
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    });
-    thisWidget.dom.wrapper.dispatchEvent(event);
   }
 }
 
