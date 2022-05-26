@@ -5,22 +5,33 @@ class BaseWidget{
     thisWidget.dom = {};
     thisWidget.dom.wrapper = wrapperElement;
 
-    thisWidget.value = initialValue;
+    thisWidget.correctValue = initialValue;
   }
 
-  setValue(value){ //12:29
+  get value(){
     const thisWidget = this;
-    //thisWidget.value = thisWidget.dom.wrapper.querySelector(settings.amountWidget.defaultValue);
+
+    return thisWidget.correctValue;
+  }
+
+  set value(value){ //12:29
+    const thisWidget = this;
+    //thisWidget.correctValue = thisWidget.dom.wrapper.querySelector(settings.amountWidget.defaultValue);
 
     const newValue = thisWidget.parseValue(value);
 
     // TODO: Add validation
-    if(thisWidget.value !== newValue && thisWidget.isValid(newValue)){
-      thisWidget.value = newValue;
+    if(thisWidget.correctValue !== newValue && thisWidget.isValid(newValue)){
+      thisWidget.correctValue = newValue;
       this.announce();
     }
-    // thisWidget.dom.input.value = thisWidget.value;
+    // thisWidget.dom.input.value = thisWidget.correctValue;
     thisWidget.renderValue();
+  }
+  setValue(value){
+    const thisWidget = this;
+
+    thisWidget.value = value;
   }
 
   parseValue(value){
