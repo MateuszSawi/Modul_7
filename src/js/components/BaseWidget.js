@@ -28,6 +28,7 @@ class BaseWidget{
     // thisWidget.dom.input.value = thisWidget.correctValue;
     thisWidget.renderValue();
   }
+  
   setValue(value){
     const thisWidget = this;
 

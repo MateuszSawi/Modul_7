@@ -10,8 +10,8 @@ class AmountWidget extends BaseWidget{
     thisWidget.initActions();
     thisWidget.setValue(thisWidget.dom.input.value);
 
-    console.log('AmountWidget: ', thisWidget);
-    //console.log('Element: ', element);
+    // console.log('AmountWidget: ', thisWidget);
+    // console.log('Element: ', element);
   }
 
   getElements(){
@@ -22,21 +22,6 @@ class AmountWidget extends BaseWidget{
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
-
-  // setValue(value){ //12:29
-  //   const thisWidget = this;
-  //   //thisWidget.value = thisWidget.dom.wrapper.querySelector(settings.amountWidget.defaultValue);
-
-  //   const newValue = thisWidget.parseValue(value);
-
-  //   // TODO: Add validation
-  //   if(thisWidget.value !== newValue && thisWidget.isValid(newValue)){
-  //     thisWidget.value = newValue;
-  //     this.announce();
-  //   }
-  //   // thisWidget.dom.input.value = thisWidget.value;
-  //   thisWidget.renderValue();
-  // }
 
   isValid(value){
     return !isNaN(value)

@@ -1,5 +1,7 @@
 import {select, templates} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
+import DatePicker from './DatePicker.js';
+import HourPicker from './HourPicker.js';
 
 class Booking{
   constructor(){
@@ -24,9 +26,15 @@ class Booking{
     thisBooking.dom = {};
 
     thisBooking.dom.wrapper = thisBooking.widgetContainer;
-
+    
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
     
+    // Zadanie: użycie widgetów DatePicker i HourPicker
+    thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector('.date-picker');
+    // thisBooking.dom.datePicker.input = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);;
+    thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector('.hour-picker');
+    // thisBooking.dom.hourPicker.input = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);
+    // --
     thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.peopleAmount);
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.widgets.booking.hoursAmount);
   }
@@ -35,19 +43,19 @@ class Booking{
     const thisBooking = this;
 
     thisBooking.price = thisBooking.dom.wrapper.querySelector(select.cartProduct.price);
-    console.log('LINIA NIZEJ BLAD !!!!');
+    
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    console.log('CHECK 1');
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
-    console.log('CHECK 2');
+    
+    thisBooking.dom.datePicker = new DatePicker(thisBooking.dom.datePicker);
+    thisBooking.dom.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+
     thisBooking.dom.peopleAmount.addEventListener('updated', function(event){
       event.preventDefault();
-      
     });
 
     thisBooking.dom.hoursAmount.addEventListener('updated', function(event){
       event.preventDefault();
-      
     });
   }
 }
