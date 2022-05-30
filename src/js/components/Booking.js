@@ -1,4 +1,4 @@
-import {select, templates, settings} from '../settings.js';
+import {select, templates, settings, classNames} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
@@ -122,16 +122,18 @@ class Booking{
 
   updateDOM(){
     const thisBooking = this;
-    thisBooking.date = thisBooking.datePicker.value;
-    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
+    thisBooking.date = thisBooking.dom.datePicker.value;
+    thisBooking.hour = utils.hourToNumber(thisBooking.dom.hourPicker.value);
 
     let allAvailable = false;
+    // console.log('allAvailable: ', allAvailable);
+    // console.log('typeof thisBooking.dom.booked[thisBooking.date]: ', typeof thisBooking.booked[thisBooking.date]);
+    // console.log('typeof thisBooking.booked: ', typeof thisBooking.dom.booked);
+    // console.log('thisBooking.date: ', thisBooking.date);
+    // console.log('typeof thisBooking.booked[thisBooking.date][thisBooking.hour]: ', typeof thisBooking.booked[thisBooking.date][thisBooking.hour]);
 
-    if (
-      typeof thisBooking.booked[thisBooking.date] == 'undefined'
-      ||
-      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
-    ) {
+    if ( typeof thisBooking.booked[thisBooking.date] == 'undefined' || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'){
       allAvailable = true;
     }
   
